@@ -2,7 +2,7 @@ package jdbctests;
 
 import java.sql.*;
 
-public class TestConnection {
+public class TWO_TestConnection {
     public static void main(String[] args) throws SQLException {
 
         //Connection String
@@ -14,7 +14,7 @@ public class TestConnection {
         String dbPassword = "hr";
 
 
-        Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);// Connection ve DriberManager java.sql olmalı -helps our java project connect to database
+        Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);// Connection ve DriverManager java.sql olmalı -helps our java project connect to database
         Statement statement = connection.createStatement(); //Statement =>helps to write and execute SQL query
         ResultSet resultSet = statement.executeQuery("SELECT * FROM regions"); //ResultSet=> a database structure where we can store the data that came from database
 
@@ -40,15 +40,17 @@ public class TestConnection {
 */
 
         System.out.println("-------------------");
-        while (resultSet.next()) {
+        while (resultSet.next()) {  //--row number is dynamic column is not dynamic
             System.out.println(resultSet.getInt(1) + " - " + resultSet.getString(2));
         }
-
 
         //close connection
         connection.close();
         statement.close();
         resultSet.close();
+
+
+
 
     }
 }
