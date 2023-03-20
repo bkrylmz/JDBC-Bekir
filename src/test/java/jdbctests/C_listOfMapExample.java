@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.*;
 import java.util.*;
 
-public class THREE_listOfMapExample {
+public class C_listOfMapExample {
     String dbUrl = "jdbc:oracle:thin:@54.236.47.147:1521:XE";
     String dbUsername = "hr";
     String dbPassword = "hr";
@@ -56,27 +56,36 @@ public class THREE_listOfMapExample {
     public  void test2() throws SQLException {
         Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);// Connection ve DriverManager java.sql olmalı -helps our java project connect to database
         Statement statement = connection.createStatement(); //Statement =>helps to write and execute SQL query
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM departments"); //ResultSet=> a database structure where we can store the data that came from database
+        ResultSet resultSet = statement.executeQuery("SELECT FIRST_NAME,LAST_NAME, SALARY, JOB_ID\n" +
+                "        from EMPLOYEES\n" +
+                "where ROWNUM<6"); //ResultSet=> a database structure where we can store the data that came from database
 
         //creating list for keeping all the rows map
         List<Map<String,Object>> queryData = new ArrayList<>();
 
+    //in order to get column names we need resultSetData
+        ResultSetMetaData rsmd = resultSet.getMetaData();
+
+        //move to first row
+        resultSet.next();
 
         Map<String, Object> row1 = new HashMap<>();
 
-        row1.put("FIRST_NAME", "Steven");
-        row1.put("Last_Name", "King");
-        row1.put("salary",24000);
-        row1.put("Job_ID","Ad_Press");
+        row1.put(rsmd.getColumnName(1), resultSet.getString(1));  // row1.put("FIRST_NAME", "Steven");
+        row1.put(rsmd.getColumnName(2), resultSet.getString(2)); //row1.put("Last_Name", "King");
+        row1.put(rsmd.getColumnName(3), resultSet.getString(3));// row1.put("salary",24000);
+        row1.put(rsmd.getColumnName(4), resultSet.getString(4));// row1.put("Job_ID","Ad_Press");
+
         System.out.println(row1.toString());
 
-
+        // move to 2nd row
+        resultSet.next();
         Map<String,Object> row2= new HashMap<>();
 
-        row2.put("FIRST_NAME", "Neena");
-        row2.put("Last_Name", "Kochhar");
-        row2.put("salary",17000);
-        row2.put("Job_ID","Ad_VP");
+        row2.put(rsmd.getColumnName(1), resultSet.getString(1));
+        row2.put(rsmd.getColumnName(2), resultSet.getString(2));
+        row2.put(rsmd.getColumnName(3), resultSet.getString(3));
+        row2.put(rsmd.getColumnName(4), resultSet.getString(4));
         System.out.println(row2.toString());
 
 

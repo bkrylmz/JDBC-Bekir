@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.*;
 
-public class ONE_jdbc_examples {
+public class A_jdbc_examples {
 
 
     String dbUrl = "jdbc:oracle:thin:@54.236.47.147:1521:XE";

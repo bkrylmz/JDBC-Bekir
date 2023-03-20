@@ -2,7 +2,7 @@ package jdbctests;
 
 import java.sql.*;
 
-public class TWO_TestConnection {
+public class B_testConnection {
     public static void main(String[] args) throws SQLException {
 
         //Connection String
